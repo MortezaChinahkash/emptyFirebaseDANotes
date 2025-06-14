@@ -21,7 +21,7 @@ export class NoteListService {
 
     this.unsubList = onSnapshot(this.getNormalRef(), (list) =>{
       list.forEach(element => {
-        console.log(element.data);
+        console.log(this.setNoteObject(element.data(), element.id));
       });
     });
 
@@ -56,5 +56,15 @@ export class NoteListService {
 
   getSingleDocRef(colRef: string, docId: string) {
     return doc(collection(this.firestore, colRef), docId);
+  }
+
+  setNoteObject(obj: any, id: string): Note {
+    return {
+      id: id,
+      type: obj.type || "",
+      title: obj.title || "",
+      content: obj.content || "",
+      marked: obj.marked || false,
+    };
   }
 }
