@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {Note} from '../interfaces/note.interface';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { collectionData, Firestore, collection, doc} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,5 +8,26 @@ import { Observable } from 'rxjs';
 })
 export class NoteListService {
 
-  constructor() { }
+  trashNotes: Note[] = [];
+  normalNotes: Note[] = [];
+
+  items$;
+  firestore: Firestore = inject(Firestore);
+
+
+  constructor() { 
+    this.items$ = collectionData(this.getNormalRef());
+  }
+
+  getTrashRef() {
+    return collection(this.firestore, 'trash');
+  }
+
+  getNormalRef() {
+    return collection(this.firestore, 'notes');
+  }
+
+  getSingleDocRef(colRef: string, docId: string) {
+    return doc(collection(this.firestore, colRef), docId);
+  }
 }
