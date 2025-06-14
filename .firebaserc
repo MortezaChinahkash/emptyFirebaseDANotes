@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "danotes-eacbf": {
+      "hosting": {
+        "danotes": [
+          "danotes-eacbf"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "danotes-eacbf"
+  }
+}
