@@ -132,7 +132,6 @@
             </button>
         </div>
     </div>
-</div>
 
     <ul>
         @for (item of (this.noteService.items$ | async); track item) {
@@ -143,8 +142,7 @@
     </ul>
 
 
-        <!-- @for (note of noteList; track note) {
-            <app-note [note]="note"></app-note> -->
-          <!-- } -->
-    </div>
+    <!-- @for (note of noteList; track note) {
+        <app-note [note]="note"></app-note>
+    } -->
 </div>
