@@ -21,7 +21,7 @@ export class NoteListService {
 
     this.unsubList = onSnapshot(this.getNormalRef(), (list) =>{
       list.forEach(element => {
-        console.log(element);
+        console.log(element.data);
       });
     });
 
@@ -29,8 +29,7 @@ export class NoteListService {
       console.log(doc);
     });
 
-    this.unsubSingle();
-    this.unsubList();
+
 
     this.items$ = collectionData(this.getNormalRef());
     this.items = this.items$.subscribe((list) => {
@@ -38,7 +37,13 @@ export class NoteListService {
         console.log(element);
       });
     }); 
+   
+  }
+
+  ngOnDestroy(): void {
     this.items.unsubscribe();
+    this.unsubSingle();
+    this.unsubList();
   }
 
   getTrashRef() {
